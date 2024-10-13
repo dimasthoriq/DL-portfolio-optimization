@@ -1,4 +1,4 @@
-# DL-portfolio-optimization
+# Deep Learning for Portfolio Optimization PyTorch Implementation
 A replication of the paper "Deep Learning for Portfolio Optimization" using PyTorch for academic project requirements
 
 # References
