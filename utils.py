@@ -96,7 +96,7 @@ def get_tensors(loader):
     return torch.cat(x_tensors), torch.cat(y_tensors)
 
 
-def data_preprocessing(data, seq_len=50, batch_size=64, shuffle=False, num_workers=4):
+def data_preprocessing(data, seq_len=50, batch_size=64, shuffle_train=False, num_workers=4):
     data_with_returns = get_returns(data)
     train, val, test = split_data(data_with_returns)
 
@@ -112,8 +112,8 @@ def data_preprocessing(data, seq_len=50, batch_size=64, shuffle=False, num_worke
     print(x_val.shape, y_val.shape)
     print(x_test.shape, y_test.shape)
 
-    train_loader = get_loaders(x_train, y_train, batch_size, True, num_workers)
-    val_loader = get_loaders(x_val, y_val, batch_size, shuffle, num_workers)
-    test_loader = get_loaders(x_test, y_test, batch_size, shuffle, num_workers)
+    train_loader = get_loaders(x_train, y_train, batch_size, shuffle_train, num_workers)
+    val_loader = get_loaders(x_val, y_val, batch_size, False, num_workers)
+    test_loader = get_loaders(x_test, y_test, batch_size, False, num_workers)
 
     return train_loader, val_loader, test_loader, scaler
