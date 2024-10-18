@@ -74,8 +74,8 @@ def training(model, train_loader, val_loader, config):
 
         # Print the losses
         print(f"Epoch: {epoch+1}/{config['epochs']},"
-              f"Train Sharpe: {-epoch_loss:.4f},"
-              f"Val Sharpe: {-epoch_val_loss:.4f}")
+              f"Train Sharpe: {-epoch_loss:.8f},"
+              f"Val Sharpe: {-epoch_val_loss:.8f}")
 
         if epoch_val_loss < best_loss:
             best_model_state = model.state_dict()
