@@ -96,9 +96,9 @@ def get_tensors(loader):
     return torch.cat(x_tensors), torch.cat(y_tensors)
 
 
-def data_preprocessing(data, seq_len=50, batch_size=64, shuffle_train=False, num_workers=4):
+def data_preprocessing(data, train_ratio=0.8, val_ratio=0.1, test_ratio=0.1, seq_len=50, batch_size=64, shuffle_train=False, num_workers=4):
     data_with_returns = get_returns(data)
-    train, val, test = split_data(data_with_returns)
+    train, val, test = split_data(data_with_returns, train_ratio, val_ratio, test_ratio)
 
     scaled_train, scaler = standardize(train)
     scaled_val = standardize(val, scaler)
