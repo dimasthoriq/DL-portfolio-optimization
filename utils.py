@@ -31,6 +31,23 @@ def evaluate_sharpe(y_pred, y_true):
     return sharpe(portfolio_returns)
 
 
+def ewm_std(data, config):
+    data_w_returns = get_returns(data)
+    data_w_returns = data_w_returns.iloc[-int(config['test_ratio']*len(data_w_returns)):, -config['output_dim']:]
+    ewmstd = data_w_returns.ewm(span=config['sequence_length']).std().iloc[config['sequence_length']:, :]
+    return torch.tensor(ewmstd.values)
+
+
+def modified_returns(weights, returns, ewmstd, vol = 0.1, c = 0.0001):
+    if vol is None:
+        scaled_returns = torch.sum(weights[1:, :] * returns[1:, :], dim=1)
+        transaction_cost = torch.sum(weights[1:, :] - weights[:-1, :], dim=1)*c
+    else:
+        scaled_returns = torch.sum(vol/ewmstd[1:, :] * weights[1:, :] * returns[1:, :], dim=1)
+        transaction_cost = torch.sum(vol/ewmstd[1:, :] * weights[1:, :] - vol/ewmstd[:-1, :] * weights[:-1, :], dim=1)*c
+    return scaled_returns - transaction_cost
+
+
 def get_data(etfs, start_date='2006-02-06', end_date='2020-01-01'):
     data = pd.DataFrame()
     for etf in etfs:
