@@ -5,4 +5,5 @@ pandas
 seaborn
 jupyter
 yfinance
+skfolio
 torch

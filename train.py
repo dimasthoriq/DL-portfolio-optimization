@@ -43,13 +43,14 @@ def validate(model, criterion, data_loader, config):
     return epoch_loss
 
 
-def training(model, train_loader, val_loader, config):
+def training(model, train_loader, val_loader, config, optimizer=None):
     # Initialize model, loss function, and optimizer
     model.to(config['device'])
-    optimizer = torch.optim.Adam(model.parameters(),
-                                 lr=config['lr'],
-                                 weight_decay=config['weight_decay'],
-                                 )
+    if optimizer is None:
+        optimizer = torch.optim.Adam(model.parameters(),
+                                     lr=config['lr'],
+                                     weight_decay=config['weight_decay'],
+                                     )
     criterion = NegativeSharpeLoss()
 
     # Initialize the variables to store the best states
@@ -99,4 +100,4 @@ def training(model, train_loader, val_loader, config):
                                    f'DLS_vol{config['volatility_scaling']}_C{config['cost_rate']}_{time_stamp}.pth'
                                    )
     torch.save(model, model_save_path)
-    return model, loss_train, loss_val, best_epoch
+    return model, loss_train, loss_val, best_epoch, optimizer

@@ -21,8 +21,8 @@ class NegativeSharpeLoss(torch.nn.Module):
             y_pred = y_pred.to(y_true.dtype)
 
         # Compute the portfolio values and returns
-        portfolio_values = torch.sum(y_pred * y_true, dim=1)
-        portfolio_returns = portfolio_values[1:] / portfolio_values[:-1] - 1
+        portfolio_returns = torch.sum(y_pred * y_true, dim=1)
+        # portfolio_returns = portfolio_values[1:] / portfolio_values[:-1] - 1
 
         # Compute the sharpe ratio
         return -sharpe(portfolio_returns)

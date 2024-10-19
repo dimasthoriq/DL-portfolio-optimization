@@ -24,8 +24,8 @@ def evaluate_sharpe(y_pred, y_true):
         y_pred = y_pred.to(y_true.dtype)
 
     # Compute the portfolio values and returns
-    portfolio_values = torch.sum(y_pred * y_true, dim=1)
-    portfolio_returns = portfolio_values[1:] / portfolio_values[:-1] - 1
+    portfolio_returns = torch.sum(y_pred * y_true, dim=1)
+    # portfolio_returns = portfolio_values[1:] / portfolio_values[:-1] - 1
 
     # Compute the sharpe ratio
     return sharpe(portfolio_returns)
@@ -104,9 +104,9 @@ def data_preprocessing(data, train_ratio=0.8, val_ratio=0.1, test_ratio=0.1, seq
     scaled_val = standardize(val, scaler)
     scaled_test = standardize(test, scaler)
 
-    x_train, y_train = get_sequences(scaled_train, train.loc[:, ['VTI', 'AGG', 'DBC', '^VIX']], seq_len)
-    x_val, y_val = get_sequences(scaled_val, val.loc[:, ['VTI', 'AGG', 'DBC', '^VIX']], seq_len)
-    x_test, y_test = get_sequences(scaled_test, test.loc[:, ['VTI', 'AGG', 'DBC', '^VIX']], seq_len)
+    x_train, y_train = get_sequences(scaled_train, train.loc[:, ['r_VTI', 'r_AGG', 'r_DBC', 'r_VIX']], seq_len)
+    x_val, y_val = get_sequences(scaled_val, val.loc[:, ['r_VTI', 'r_AGG', 'r_DBC', 'r_VIX']], seq_len)
+    x_test, y_test = get_sequences(scaled_test, test.loc[:, ['r_VTI', 'r_AGG', 'r_DBC', 'r_VIX']], seq_len)
 
     print(x_train.shape, y_train.shape)
     print(x_val.shape, y_val.shape)
