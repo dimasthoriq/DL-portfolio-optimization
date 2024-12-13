@@ -1,5 +1,5 @@
 # Deep Learning for Portfolio Optimization PyTorch Implementation
-A replication of the paper "Deep Learning for Portfolio Optimization" using PyTorch for academic project requirements
+A replication of the paper "Deep Learning for Portfolio Optimization" using PyTorch
 
 # Experiment
 Setups:
