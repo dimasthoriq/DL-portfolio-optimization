@@ -1,5 +1,5 @@
 # Deep Learning for Portfolio Optimization PyTorch Implementation
-A replication of the paper "Deep Learning for Portfolio Optimization" using PyTorch
+A replication of the paper "Deep Learning for Portfolio Optimization" using PyTorch on the VTI, AGG, DBC, and VIX prices from 2006-2019
 
 # Experiment
 Setups:
@@ -11,5 +11,5 @@ Results:
 ![DLS_comp](https://github.com/user-attachments/assets/bf01aa48-30ca-4a5d-9c3f-c82285d72159)
 
 
-# Citation(s)
+# Reference(s)
 Zhang, Z., Zohren, S., & Roberts, S. (2020). Deep learning for portfolio optimization. _The Journal of Financial Data Science_ 2(4): 8-20. https://arxiv.org/abs/2005.13665
